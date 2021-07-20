@@ -7,16 +7,20 @@
 
 using namespace std;
 
-string board = "x x x\nx x x\nx x x";
+string boardString = "x x x\nx x x\nx x x";
 
 //A vector of a column containing row vector (row, column)
 vector<vector<int>> boardVector;
+
+void initialiseBoard();
+void printBoard();
 
 int main() {
     bool running = true;
     cout << "Welcome to Rain." << endl;
     cout << "Type WASD characters and press enter to move." << endl << endl;
-    generateBoard();
+    initialiseBoard();
+    printBoard();
     while(running) {
         //cout << board << endl;
         char direction = getchar();
@@ -37,7 +41,6 @@ int main() {
 //Generate the initial board in the boardVector
 void initialiseBoard() {
     for(int i = 0; i < 3; i++) {
-        cout << "Row: " << i << endl;
         vector<int> row;
         row.push_back(0);
         row.push_back(0);
@@ -53,4 +56,13 @@ void generateBoard(char direction) {
 
 //Compute the board string from the boardVector and display it
 void printBoard() {
+    boardString = "";
+    for(int row = 0; row < boardVector.size(); row++) {
+        vector<int> vectorRow = boardVector[row];
+        for(int col = 0; col < vectorRow.size(); col++) {
+            boardString += to_string(vectorRow[col]) + " ";
+        }
+        boardString += "\n";
+    }
+    cout << boardString << endl;
 }
